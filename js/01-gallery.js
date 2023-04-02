@@ -12,6 +12,10 @@ gallery.insertAdjacentHTML("beforeend", markup);
 
 gallery.addEventListener("click", onClick);
 function onClick(evt) {
+  if (!evt.target.classList.contains("gallery__image")) {
+    return;
+  }
+
   evt.preventDefault();
   const target = evt.target;
   const link = target.dataset.source;
@@ -21,5 +25,6 @@ function onClick(evt) {
   instance.show();
   evt.currentTarget.addEventListener("keydown", (evt) =>
     evt.key === "Escape" ? instance.close() : false
-  );
+  ),
+    { once: true };
 }
